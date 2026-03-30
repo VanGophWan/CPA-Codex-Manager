@@ -6,6 +6,7 @@ import random
 from datetime import datetime
 from enum import Enum
 from typing import Dict, List, Tuple
+from ..app_meta import APP_DESCRIPTION, APP_NAME, APP_VERSION
 
 
 # ============================================================================
@@ -38,10 +39,6 @@ class EmailServiceType(str, Enum):
 # ============================================================================
 # 应用常量
 # ============================================================================
-
-APP_NAME = "CPA-Codex-Manager"
-APP_VERSION = "1.0.0"
-APP_DESCRIPTION = "CPA-Codex-Manager"
 
 # ============================================================================
 # OpenAI OAuth 相关常量

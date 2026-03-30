@@ -1,0 +1,17 @@
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+.DS_Store
+dist
+build
+logs
+data
+assets
+uv.lock
+CPA-Codex-Manager-Desktop.spec

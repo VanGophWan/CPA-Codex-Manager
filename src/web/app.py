@@ -17,6 +17,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse, RedirectResponse
 
+from ..app_meta import APP_NAME, APP_VERSION, display_name
 from ..config.settings import get_settings
 from .routes import api_router
 from .routes.websocket import router as ws_router
@@ -92,6 +93,9 @@ def create_app() -> FastAPI:
     # 模板引擎
     templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
     templates.env.globals["static_version"] = _build_static_asset_version(STATIC_DIR)
+    templates.env.globals["app_name"] = APP_NAME
+    templates.env.globals["app_version"] = APP_VERSION
+    templates.env.globals["app_display_name"] = display_name()
 
     def _auth_token(password: str) -> str:
         secret = get_settings().webui_secret_key.get_secret_value().encode("utf-8")
@@ -197,7 +201,7 @@ def create_app() -> FastAPI:
         asyncio.ensure_future(auto_patrol_manager._delayed_start_if_needed())
 
         logger.info("=" * 50)
-        logger.info(f"Codex 自动化注册 + CPA 账号管理系统 v1.0.0 启动中")
+        logger.info(f"{APP_NAME} v{APP_VERSION} 启动中")
         logger.info(f"调试模式: {settings.debug}")
         logger.info(f"数据库连接成功: {settings.database_url}")
         logger.info("=" * 50)

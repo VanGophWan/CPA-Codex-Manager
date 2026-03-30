@@ -20,6 +20,7 @@ except ModuleNotFoundError as exc:
 else:
     missing_module_error = None
 
+from src.app_meta import display_name
 from webui import create_uvicorn_config, setup_application
 
 
@@ -80,7 +81,7 @@ def main():
     server_thread.start()
     _wait_for_server(host, port)
 
-    window_title = os.environ.get("APP_WINDOW_TITLE", "CPA-Codex-Manager")
+    window_title = os.environ.get("APP_WINDOW_TITLE", display_name())
     url = f"http://{host}:{port}"
     logger.info("桌面版已启动: %s", url)
 

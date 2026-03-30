@@ -4,10 +4,11 @@ import os
 import sys
 from pathlib import Path
 
+from src.app_meta import APP_NAME, APP_VERSION
 
 project_root = Path.cwd()
 block_cipher = None
-app_name = "CPA-Codex-Manager"
+app_name = APP_NAME
 macos_icon = project_root / "assets" / "macOS" / "AppIcon.icns"
 if not macos_icon.exists():
     macos_icon = project_root / "assets" / "icon.icns"
@@ -104,8 +105,8 @@ if is_macos:
             "CFBundleName": app_name,
             "CFBundleDisplayName": app_name,
             "CFBundleExecutable": app_name,
-            "CFBundleShortVersionString": "1.0.0",
-            "CFBundleVersion": "1.0.0",
+            "CFBundleShortVersionString": APP_VERSION,
+            "CFBundleVersion": APP_VERSION,
             "LSMinimumSystemVersion": "11.0",
         },
     )

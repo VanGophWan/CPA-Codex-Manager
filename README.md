@@ -75,7 +75,70 @@ python webui.py
 
 进入系统设置页添加 CPA 服务，即可使用。
 
-### 4. 桌面版运行
+### Docker 运行
+
+先准备目录：
+
+```bash
+mkdir -p ~/CPA-Codex-Manager
+cd ~/CPA-Codex-Manager
+mkdir -p data logs
+```
+
+#### 从 GitHub 直接拉取 compose 示例
+
+```bash
+curl -O https://raw.githubusercontent.com/Maoleio/CPA-Codex-Manager/main/docker-compose.yml
+```
+
+```yaml
+services:
+  cpa-codex-manager:
+    image: maoleio/cpa-codex-manager:latest
+    container_name: cpa-codex-manager
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      WEBUI_HOST: 0.0.0.0
+      WEBUI_PORT: 8000
+      WEBUI_ACCESS_PASSWORD: your_secret_password
+      APP_DATABASE_URL: data/database.db
+      # postgresql
+      # APP_DATABASE_URL: postgresql://user:password@host:5432/dbname
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+```
+
+字段说明：
+
+- `WEBUI_HOST`：Web 服务监听地址
+- `WEBUI_PORT`：Web 服务端口，默认 `8000`
+- `WEBUI_ACCESS_PASSWORD`：Web 管理后台登录密码
+- `APP_DATABASE_URL`：数据库连接地址
+
+
+启动：
+
+```bash
+docker compose up -d
+```
+
+查看日志：
+
+```bash
+docker compose logs -f
+```
+
+更新镜像：
+
+```bash
+docker compose pull
+docker compose up -d
+```
+
+### 桌面版运行
 
 如果你想以桌面窗口方式运行，而不是手动打开浏览器：
 

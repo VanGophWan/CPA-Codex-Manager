@@ -1,6 +1,6 @@
 [project]
 name = "CPA-Codex-Manager"
-version = "1.0.0"
+dynamic = ["version"]
 description = "CPA-Codex-Manager"
 requires-python = ">=3.10"
 dependencies = [
@@ -37,6 +37,9 @@ CPA-Codex-Manager-Desktop = "desktop:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/app_meta.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src"]

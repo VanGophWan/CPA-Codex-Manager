@@ -9,6 +9,7 @@ from enum import Enum
 from pydantic import BaseModel, field_validator
 from pydantic.types import SecretStr
 from dataclasses import dataclass
+from ..app_meta import APP_NAME, APP_VERSION
 
 
 class SettingCategory(str, Enum):
@@ -42,13 +43,13 @@ SETTING_DEFINITIONS: Dict[str, SettingDefinition] = {
     # 应用信息
     "app_name": SettingDefinition(
         db_key="app.name",
-        default_value="OpenAI/Codex CLI 自动注册系统",
+        default_value=APP_NAME,
         category=SettingCategory.GENERAL,
         description="应用名称"
     ),
     "app_version": SettingDefinition(
         db_key="app.version",
-        default_value="2.0.0",
+        default_value=APP_VERSION,
         category=SettingCategory.GENERAL,
         description="应用版本"
     ),
@@ -563,8 +564,8 @@ class Settings(BaseModel):
     """
 
     # 应用信息
-    app_name: str = "OpenAI/Codex CLI 自动注册系统"
-    app_version: str = "2.0.0"
+    app_name: str = APP_NAME
+    app_version: str = APP_VERSION
     debug: bool = False
 
     # 数据库配置

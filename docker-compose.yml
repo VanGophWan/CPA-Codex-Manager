@@ -1,0 +1,17 @@
+services:
+  cpa-codex-manager:
+    image: maoleio/cpa-codex-manager:latest
+    container_name: cpa-codex-manager
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      WEBUI_HOST: 0.0.0.0
+      WEBUI_PORT: 8000
+      WEBUI_ACCESS_PASSWORD: your_secret_password
+      APP_DATABASE_URL: data/database.db
+      # APP_DATABASE_URL: postgresql://user:password@host:5432/dbname
+      # postgresql
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
